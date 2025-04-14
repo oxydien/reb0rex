@@ -7,9 +7,15 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { useEffect, useRef, useState } from "react";
 
+export interface Vector3KeyframeValue {
+  x: number;
+  y: number;
+  z: number;
+}
+
 interface Vector3Keyframe {
   percentage: number;
-  value: THREE.Vector3;
+  value: Vector3KeyframeValue;
   easing?: (t: number) => number;
 }
 
@@ -19,12 +25,12 @@ interface OpacityKeyframe {
   easing?: (t: number) => number;
 }
 
-interface ModelKeyframes {
+export interface ModelKeyframes {
   position?: Vector3Keyframe[];
   opacity?: OpacityKeyframe[];
 }
 
-interface CameraKeyframes {
+export interface CameraKeyframes {
   position?: Vector3Keyframe[];
   target?: Vector3Keyframe[];
 }
@@ -33,6 +39,8 @@ interface ComputerPartsViewerProps {
   percentage?: number;
   modelKeyframes?: Record<string, ModelKeyframes>;
   cameraKeyframes?: CameraKeyframes;
+  onLoad?: () => void;
+  onError?: () => void;
 }
 
 export const easingFunctions = {
@@ -47,6 +55,8 @@ export default function ComputerPartsViewer({
   percentage = 0,
   modelKeyframes = {},
   cameraKeyframes = {},
+  onLoad = () => {},
+  onError = () => {},
 }: ComputerPartsViewerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<THREE.Scene | null>(null);
@@ -63,41 +73,43 @@ export default function ComputerPartsViewer({
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
 
+  const createVector3 = (value: Vector3KeyframeValue): THREE.Vector3 => {
+    return new THREE.Vector3(value.x, value.y, value.z);
+  };
+
   const interpolateVector3 = (
-    keyframes: Vector3Keyframe[],
-    percentage: number,
+      keyframes: Vector3Keyframe[],
+      percentage: number
   ): THREE.Vector3 => {
     if (keyframes.length === 0) return new THREE.Vector3();
-    if (keyframes.length === 1) return keyframes[0].value.clone();
+    if (keyframes.length === 1) return createVector3(keyframes[0].value);
 
-    if (percentage <= keyframes[0].percentage)
-      return keyframes[0].value.clone();
+    if (percentage <= keyframes[0].percentage) return createVector3(keyframes[0].value);
     if (percentage >= keyframes[keyframes.length - 1].percentage) {
-      return keyframes[keyframes.length - 1].value.clone();
+      return createVector3(keyframes[keyframes.length - 1].value);
     }
 
     let startFrame = keyframes[0];
     let endFrame = keyframes[keyframes.length - 1];
 
     for (let i = 0; i < keyframes.length - 1; i++) {
-      if (
-        percentage >= keyframes[i].percentage &&
-        percentage <= keyframes[i + 1].percentage
-      ) {
+      if (percentage >= keyframes[i].percentage && percentage <= keyframes[i + 1].percentage) {
         startFrame = keyframes[i];
         endFrame = keyframes[i + 1];
         break;
       }
     }
 
-    const segmentPercentage =
-      (percentage - startFrame.percentage) /
-      (endFrame.percentage - startFrame.percentage);
+    const segmentPercentage = (percentage - startFrame.percentage) /
+        (endFrame.percentage - startFrame.percentage);
 
     const easingFn = endFrame.easing || easingFunctions.linear;
     const t = easingFn(segmentPercentage);
 
-    return new THREE.Vector3().lerpVectors(startFrame.value, endFrame.value, t);
+    const start = createVector3(startFrame.value);
+    const end = createVector3(endFrame.value);
+
+    return new THREE.Vector3().lerpVectors(start, end, t);
   };
 
   const interpolateOpacity = (
@@ -173,6 +185,7 @@ export default function ComputerPartsViewer({
       { name: "ram", path: "/reborex_ram.glb" },
       { name: "psu", path: "/reborex_psu.glb" },
       { name: "gpu", path: "/reborex_gpu.glb" },
+      { name: "cpu", path: "/reborex_cpu.glb" },
       { name: "io", path: "/reborex_io.glb" },
     ];
 
@@ -238,6 +251,8 @@ export default function ComputerPartsViewer({
               controls.target.copy(center);
               controls.update();
             }
+
+            onLoad();
           }
         },
         (xhr) => {
@@ -249,6 +264,7 @@ export default function ComputerPartsViewer({
           console.error(`Error loading ${model.name}:`, err);
           setError(`Failed to load ${model.name}`);
           setIsLoading(false);
+          onError();
         },
       );
     });
