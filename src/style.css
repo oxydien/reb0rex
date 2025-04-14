@@ -1,0 +1,40 @@
+:root {
+  font-family:
+    "Fira Code", "JetBrains Mono", "Source Code Pro", "Consolas", "Inconsolata",
+    "Ubuntu Mono", "Monaco", "DejaVu Sans Mono", "Menlo", "Roboto Mono",
+    "Cascadia Code", "Hack", "Iosevka", "Liberation Mono", "Noto Mono",
+    monospace;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color: #ffffff;
+  background-color: #131313;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  min-height: 300vh;
+}
+
+#app,
+#app > div {
+  width: 100%;
+  height: 100%;
+}
+
+.model_renderer {
+  position: fixed;
+  inset: 0;
+  max-width: 800px;
+  margin-inline: auto;
+  overflow: hidden;
+  z-index: -1;
+}
