@@ -1,15 +1,23 @@
 import { render } from "preact";
-import ModelRenderer, {ModelKeyframes, CameraKeyframes} from "./components/renderer";
+import ModelRenderer, {
+  ModelKeyframes,
+  CameraKeyframes,
+} from "./components/renderer";
 import { easingFunctions } from "./components/renderer";
 import "./assets/tailwind.js";
 import "./style.css";
 import { useEffect, useState } from "preact/hooks";
 import Title from "./components/Title";
-import {Section, SECTIONS} from "./data/sections";
-import {getGlobalPercentagePerSection, getSectionPercentage} from "./utils/section";
+import { Section, SECTIONS } from "./data/sections";
+import {
+  getGlobalPercentagePerSection,
+  getSectionPercentage,
+} from "./utils/section";
+import Supplier from "./components/Supplier";
 
 export function App() {
   const [scrollPercentage, setScrollPercentage] = useState(0);
+  const [sections, setSections] = useState<Section[]>([]);
   const [partKeys, setPartKeys] = useState<Record<string, ModelKeyframes>>({});
   const [cameraKeys, setCameraKeys] = useState<CameraKeyframes>({});
   const [modelLoaded, setModelLoaded] = useState(false);
@@ -33,26 +41,33 @@ export function App() {
       const width = window.innerWidth;
       const height = window.innerHeight;
       const data = SECTIONS(width, height);
+      setSections(data);
       parseSections(data);
-    }
+    };
     handleResize();
     window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener("resize", handleResize)
-    }
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   const parseSections = (data: Section[]) => {
     const modelKeyframes: Record<string, ModelKeyframes> = {};
-    const cameraKeyframes: CameraKeyframes = {position:[], target: []};
+    const cameraKeyframes: CameraKeyframes = { position: [], target: [] };
+    const cardTimeOffset = getGlobalPercentagePerSection(30);
 
     console.debug("RAW", data);
 
     for (let i = 1; i <= data.length; i++) {
-      const section = data[i-1];
-      const startPercentage = getSectionPercentage(i);
-      const endPercentage = startPercentage + getGlobalPercentagePerSection(10);
+      const section = data[i - 1];
+      const startPercentage =
+        getSectionPercentage(i) +
+        (section.type === "card" ? cardTimeOffset : 0);
+      const endPercentage =
+        startPercentage +
+        getGlobalPercentagePerSection(10) +
+        (section.type === "card" ? cardTimeOffset : 0);
 
       // Part keyframes
       for (const key of Object.keys(section.keyframes)) {
@@ -61,31 +76,31 @@ export function App() {
         const opacityFrame = frame.opacity;
 
         if (modelKeyframes[key] == null) {
-            modelKeyframes[key] = {position: [], opacity: []};
+          modelKeyframes[key] = { position: [], opacity: [] };
         }
 
         modelKeyframes[key].position.push({
           percentage: startPercentage,
           value: positionFrame.value,
-          easing: positionFrame.easing || easingFunctions.easeInOut
+          easing: positionFrame.easing || easingFunctions.easeInOut,
         });
 
         modelKeyframes[key].opacity.push({
           percentage: startPercentage,
           value: opacityFrame,
-          easing: easingFunctions.easeInOut
+          easing: easingFunctions.easeInOut,
         });
 
         if (!["sticky", "title"].includes(section.type)) {
           modelKeyframes[key].opacity.push({
             percentage: endPercentage,
             value: opacityFrame,
-            easing: easingFunctions.easeInOut
+            easing: easingFunctions.easeInOut,
           });
           modelKeyframes[key].position.push({
             percentage: endPercentage,
             value: positionFrame.value,
-            easing: positionFrame.easing || easingFunctions.easeInOut
+            easing: positionFrame.easing || easingFunctions.easeInOut,
           });
         }
       }
@@ -97,38 +112,40 @@ export function App() {
       cameraKeyframes.position.push({
         percentage: startPercentage,
         value: cameraPos.value,
-        easing: cameraPos.easing || easingFunctions.easeInOut
+        easing: cameraPos.easing || easingFunctions.easeInOut,
       });
 
       cameraKeyframes.target.push({
         percentage: startPercentage,
         value: cameraTarget.value,
-        easing: cameraTarget.easing || easingFunctions.easeInOut
+        easing: cameraTarget.easing || easingFunctions.easeInOut,
       });
 
       if (!["sticky", "title"].includes(section.type)) {
         cameraKeyframes.position.push({
           percentage: endPercentage,
           value: cameraPos.value,
-          easing: cameraPos.easing || easingFunctions.easeInOut
+          easing: cameraPos.easing || easingFunctions.easeInOut,
         });
         cameraKeyframes.target.push({
           percentage: endPercentage,
           value: cameraTarget.value,
-          easing: cameraTarget.easing || easingFunctions.easeInOut
+          easing: cameraTarget.easing || easingFunctions.easeInOut,
         });
       }
     }
 
-    console.debug("NEW", cameraKeyframes, modelKeyframes)
+    console.debug("NEW", cameraKeyframes, modelKeyframes);
 
     setCameraKeys(cameraKeyframes);
     setPartKeys(modelKeyframes);
-  }
+  };
 
   return (
     <div className={modelLoaded ? "model_show" : "model_hidden"}>
-      <Title percentage={scrollPercentage}/>
+      <Title percentage={scrollPercentage} />
+
+      <Supplier sections={sections} scroll={scrollPercentage} />
 
       <ModelRenderer
         percentage={scrollPercentage}
