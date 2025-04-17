@@ -1,6 +1,7 @@
 import { Section } from "../data/sections";
 import { JSX } from "preact/jsx-runtime";
 import Card from "./Card";
+import KofiPropagation from "./KofiPropagation";
 
 export default function Supplier({
   sections,
@@ -13,15 +14,13 @@ export default function Supplier({
     section: Section,
     index: number,
   ): JSX.Element | undefined => {
-    if (["hidden"].includes(section.type)) {
-      return null;
-    }
-
     if (section.type === "card") {
       return <Card section={section} section_id={index + 1} scroll={scroll} />;
+    } else if (section.type === "kofi") {
+      return <KofiPropagation section_id={index + 1} scroll={scroll} />;
     }
 
-    return null;
+    return <div className={"empty"}></div>;
   };
 
   return (

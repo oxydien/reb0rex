@@ -17,10 +17,11 @@ export type CameraKeyframes = {
 
 export interface Section {
   title: string;
-  type: "hidden" | "card" | "sticky" | "title";
+  type: "hidden" | "card" | "sticky" | "kofi" | "title";
   part?: string;
   detail?: "right" | "left" | "full";
   translation?: string;
+  image?: string;
   keyframes: Record<string, PartKeyframes>;
   camera: CameraKeyframes;
 }
@@ -82,6 +83,7 @@ export const SECTIONS = (
       part: "AMD Ryzen 5 7600",
       detail: "right",
       translation: "section.card.cpu",
+      image: "/cpu-img.png",
       keyframes: {
         gpu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         cpu: { position: { value: vec(0, 0, 2) }, opacity: 1 },
@@ -102,8 +104,9 @@ export const SECTIONS = (
       title: "GPU",
       type: "card",
       detail: "right",
-      part: "AMD Radeon RX 7700 XT",
+      part: "AMD Radeon RX 7800 XT",
       translation: "section.card.gpu",
+      image: "/gpu-img.png",
       keyframes: {
         gpu: { position: { value: vec(0, 0, 2) }, opacity: 1 },
         cpu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
@@ -126,6 +129,7 @@ export const SECTIONS = (
       detail: "left",
       part: "2x 16GB DDR5",
       translation: "section.card.ram",
+      image: "/ram-img.png",
       keyframes: {
         gpu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         cpu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
@@ -148,6 +152,7 @@ export const SECTIONS = (
       detail: "right",
       part: "MSI MAG A750GL PCIE5 750 W 80+ Gold",
       translation: "section.card.psu",
+      image: "/psu-img.png",
       keyframes: {
         gpu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         cpu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
@@ -170,6 +175,7 @@ export const SECTIONS = (
       detail: "right",
       part: "Gigabyte B650M D3HP",
       translation: "section.card.mb",
+      image: "/mb-img.png",
       keyframes: {
         gpu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         cpu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
@@ -185,7 +191,7 @@ export const SECTIONS = (
     },
     {
       title: "Status",
-      type: "hidden",
+      type: "kofi",
       detail: "full",
       keyframes: {
         gpu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
@@ -207,12 +213,15 @@ export const SECTIONS = (
       title: "Footer",
       type: "hidden",
       keyframes: {
-        gpu: { position: { value: vec(0, 0, 0) }, opacity: 0.6 },
-        cpu: { position: { value: vec(0, 0, 0) }, opacity: 0.6 },
-        ram: { position: { value: vec(0, 0, 0) }, opacity: 0.6 },
-        io: { position: { value: vec(0, 0, 0) }, opacity: 0.6 },
-        psu: { position: { value: vec(0, 0, 0) }, opacity: 0.6 },
-        motherboard: { position: { value: vec(0, 0, 0) }, opacity: 0.6 },
+        gpu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
+        cpu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
+        ram: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
+        io: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
+        psu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
+        motherboard: {
+          position: { value: vec(0, 0, 0) },
+          opacity: opacityBackground,
+        },
       },
       camera: {
         position: { value: vec(offsetX, 0, offsetZ + 0.6) },
@@ -221,4 +230,3 @@ export const SECTIONS = (
     },
   ];
 };
-

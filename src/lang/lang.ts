@@ -1,12 +1,16 @@
 import { EnUsTranslation } from "./translations/en-us";
+import { CzCsTranslation } from "./translations/cz-cs";
 
 export type Translation = Record<string, string>;
 
 const TRANSLATIONS = {
   "en-us": EnUsTranslation,
+  "cz-cs": CzCsTranslation,
 };
 
 const getCurrentLang = (): string => {
+  //return "cz-cs";
+
   const userLang =
     window.navigator.language || navigator["userLanguage"] || "en-us";
   if (userLang.includes("cs")) {

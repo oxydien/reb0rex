@@ -55,7 +55,6 @@ export default function ({
     <div
       className={`card card-${section.detail || "right"}`}
       style={{
-        position: "fixed",
         top: position,
         left: "50%",
         transform: "translate(-50%, -50%)",
@@ -72,7 +71,9 @@ export default function ({
           {t(section.translation || "error.notrans")}
         </p>
       </div>
-      <div className="class-image">{/* TODO: Add image*/}</div>
+      <div className="card-image">
+        <img src={section.image} />
+      </div>
     </div>
   );
 }

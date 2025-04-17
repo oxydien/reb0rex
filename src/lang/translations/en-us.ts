@@ -2,13 +2,19 @@ import { Translation } from "../lang";
 
 export const EnUsTranslation: Translation = {
   "section.card.cpu":
-    "Hexa-core (6 Core) 3.80 GHz Processor, Retail Pack, 32 MB L3 Cache, 6 MB L2 Cache, 64-bit Processing, 5.10 GHz Overclocking Speed, 5 nm, Socket AM5, Radeon Graphics Graphics, 65 W, 12 Threads.",
+    "Hexa-core (6 Core) 3.80 GHz Processor, 32 MB L3 Cache, 6 MB L2 Cache, 64-bit Processing, 5.10 GHz Overclocking Speed, 5 nm, Socket AM5, 65 W, 12 Threads.",
   "section.card.gpu":
-    "2,816 stream processors, 12GB of GDDR6 memory, and a boost clock speed of up to 2.5 GHz, delivering high-performance gaming and content creation capabilities.",
+    "Navi 32 XT Chip. 3840 Rasterization cores. 2124 MHz Boost clock, 256 bit Memory BUS, 16 GB Video memory, FreeSync, AV1 Encoding, 250 W",
   "section.card.ram":
-    "provides 32GB of high-speed, power-efficient memory ideal for gaming, content creation, and multitasking.",
+    "32GB of high-speed, power-efficient memory. PC5-48000, 6000MHz",
   "section.card.psu":
     "90% efficiency, 4 pcs PCIe (8-pin / 6+2-pin), 1 pcs 12VHPWR (16-pin), 8 SATA, detachable cables, active PFC, thermal speed control and power switch, 120 mm fan, fully modular",
   "section.card.mb":
-    "micro-ATX motherboard, featuring the B650 chipset. DDR5 memory, PCIe 5.0, 8+2+1 power delivery phases, making it. Dual M.2 slots, 2.5GbE LAN, and USB 3.2 Gen 2 ports.",
+    "micro-ATX motherboard, B650 chipset. DDR5 memory, PCIe 5.0, 8+2+1 phases. Dual M.2 slots, 2.5GbE LAN, and USB 3.2 Gen 2 ports.",
+
+  "section.kofi.title": "LET'S MAKE IT HAPPEN",
+  "section.kofi.button": "Help me achieve this",
+  "section.kofi.amount": "960$",
+  "section.kofi.description":
+    "If you want to help me build my computer and make it faster, you can support me on Ko-fi. It would mean a lot to me. <3",
 };

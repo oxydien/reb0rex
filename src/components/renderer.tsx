@@ -78,13 +78,14 @@ export default function ComputerPartsViewer({
   };
 
   const interpolateVector3 = (
-      keyframes: Vector3Keyframe[],
-      percentage: number
+    keyframes: Vector3Keyframe[],
+    percentage: number,
   ): THREE.Vector3 => {
     if (keyframes.length === 0) return new THREE.Vector3();
     if (keyframes.length === 1) return createVector3(keyframes[0].value);
 
-    if (percentage <= keyframes[0].percentage) return createVector3(keyframes[0].value);
+    if (percentage <= keyframes[0].percentage)
+      return createVector3(keyframes[0].value);
     if (percentage >= keyframes[keyframes.length - 1].percentage) {
       return createVector3(keyframes[keyframes.length - 1].value);
     }
@@ -93,15 +94,19 @@ export default function ComputerPartsViewer({
     let endFrame = keyframes[keyframes.length - 1];
 
     for (let i = 0; i < keyframes.length - 1; i++) {
-      if (percentage >= keyframes[i].percentage && percentage <= keyframes[i + 1].percentage) {
+      if (
+        percentage >= keyframes[i].percentage &&
+        percentage <= keyframes[i + 1].percentage
+      ) {
         startFrame = keyframes[i];
         endFrame = keyframes[i + 1];
         break;
       }
     }
 
-    const segmentPercentage = (percentage - startFrame.percentage) /
-        (endFrame.percentage - startFrame.percentage);
+    const segmentPercentage =
+      (percentage - startFrame.percentage) /
+      (endFrame.percentage - startFrame.percentage);
 
     const easingFn = endFrame.easing || easingFunctions.linear;
     const t = easingFn(segmentPercentage);
@@ -187,6 +192,7 @@ export default function ComputerPartsViewer({
       { name: "gpu", path: "/reborex_gpu.glb" },
       { name: "cpu", path: "/reborex_cpu.glb" },
       { name: "io", path: "/reborex_io.glb" },
+      //      { path: "" },
     ];
 
     let loadedCount = 0;

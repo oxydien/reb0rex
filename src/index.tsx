@@ -14,13 +14,16 @@ import {
   getSectionPercentage,
 } from "./utils/section";
 import Supplier from "./components/Supplier";
+import Footer from "./components/Footer";
 
 export function App() {
   const [scrollPercentage, setScrollPercentage] = useState(0);
   const [sections, setSections] = useState<Section[]>([]);
   const [partKeys, setPartKeys] = useState<Record<string, ModelKeyframes>>({});
   const [cameraKeys, setCameraKeys] = useState<CameraKeyframes>({});
+  const [modelFailed, setModelFailed] = useState(false);
   const [modelLoaded, setModelLoaded] = useState(false);
+  const [showBackup, setShowBackup] = useState(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -142,17 +145,43 @@ export function App() {
   };
 
   return (
-    <div className={modelLoaded ? "model_show" : "model_hidden"}>
+    <div
+      className={`${modelLoaded ? "model_show" : "model_hidden"} ${modelFailed ? "model_failed" : ""}`}
+    >
       <Title percentage={scrollPercentage} />
 
-      <Supplier sections={sections} scroll={scrollPercentage} />
+      {modelLoaded && (
+        <div className="supplier">
+          <Supplier sections={sections} scroll={scrollPercentage} />
+        </div>
+      )}
 
-      <ModelRenderer
-        percentage={scrollPercentage}
-        modelKeyframes={partKeys}
-        cameraKeyframes={cameraKeys}
-        onLoad={() => setModelLoaded(true)}
-      />
+      {!modelFailed && (
+        <ModelRenderer
+          percentage={scrollPercentage}
+          modelKeyframes={partKeys}
+          cameraKeyframes={cameraKeys}
+          onLoad={() => {
+            if (modelLoaded) {
+              return;
+            }
+            setModelLoaded(true);
+            setShowBackup(false);
+          }}
+          onError={() => {
+            setModelFailed(true);
+            setShowBackup(true);
+          }}
+        />
+      )}
+      <div
+        className="backup"
+        style={{ visibility: showBackup ? "visible" : "hidden" }}
+      >
+        <Supplier sections={sections} scroll={scrollPercentage} />
+      </div>
+
+      <Footer />
     </div>
   );
 }

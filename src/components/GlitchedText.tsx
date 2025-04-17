@@ -7,7 +7,9 @@ interface GlitchedTextProps {
 }
 
 const alphabet =
-  "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890Đ~°&[]Łł<{}^$'*>þø→↓←%#@!` ".split("");
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890Đ~°&[]Łł<{}^$'*>þø→↓←%#@!` ,-_".split(
+    "",
+  );
 
 const getRandomChar = (): string => {
   const random = Math.floor(Math.random() * alphabet.length);
