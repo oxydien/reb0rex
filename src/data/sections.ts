@@ -51,6 +51,7 @@ export const SECTIONS = (
         gpu: { position: { value: vec(0, 0, 0) }, opacity: 1 },
         cpu: { position: { value: vec(0, 0, 0) }, opacity: 1 },
         ram: { position: { value: vec(0, 0, 0) }, opacity: 1 },
+        ram2: { position: { value: vec(0, 0, 0) }, opacity: 1 },
         psu: { position: { value: vec(0, 0, 0) }, opacity: 1 },
         io: { position: { value: vec(0, 0, 0) }, opacity: 1 },
         motherboard: { position: { value: vec(0, 0, 0) }, opacity: 1 },
@@ -68,6 +69,7 @@ export const SECTIONS = (
         gpu: { position: { value: vec(0, 0, 0) }, opacity: 1 },
         cpu: { position: { value: vec(0, 0, 0) }, opacity: 1 },
         ram: { position: { value: vec(0, 0, 0) }, opacity: 1 },
+        ram2: { position: { value: vec(0, 0, 0) }, opacity: 1 },
         psu: { position: { value: vec(0, 0, 0) }, opacity: 1 },
         io: { position: { value: vec(0, 0, 0) }, opacity: 1 },
         motherboard: { position: { value: vec(0, 0, 0) }, opacity: 1 },
@@ -88,6 +90,7 @@ export const SECTIONS = (
         gpu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         cpu: { position: { value: vec(0, 0, 2) }, opacity: 1 },
         ram: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
+        ram2: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         io: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         psu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         motherboard: {
@@ -111,6 +114,7 @@ export const SECTIONS = (
         gpu: { position: { value: vec(0, 0, 2) }, opacity: 1 },
         cpu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         ram: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
+        ram2: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         io: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         psu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         motherboard: {
@@ -134,6 +138,7 @@ export const SECTIONS = (
         gpu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         cpu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         ram: { position: { value: vec(-1.5, 0, 1.5) }, opacity: 1 },
+        ram2: { position: { value: vec(-1.51, 0, 1.45) }, opacity: 1 },
         io: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         psu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         motherboard: {
@@ -157,6 +162,7 @@ export const SECTIONS = (
         gpu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         cpu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         ram: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
+        ram2: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         io: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         psu: { position: { value: vec(-1, 0, 2) }, opacity: 1 },
         motherboard: {
@@ -180,6 +186,7 @@ export const SECTIONS = (
         gpu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         cpu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         ram: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
+        ram2: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         io: { position: { value: vec(0, 0, -2) }, opacity: 1 },
         psu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         motherboard: { position: { value: vec(0, 0, -2) }, opacity: 1 },
@@ -197,6 +204,7 @@ export const SECTIONS = (
         gpu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         cpu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         ram: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
+        ram2: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         io: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         psu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         motherboard: {
@@ -216,6 +224,7 @@ export const SECTIONS = (
         gpu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         cpu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         ram: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
+        ram2: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         io: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         psu: { position: { value: vec(0, 0, 0) }, opacity: opacityBackground },
         motherboard: {

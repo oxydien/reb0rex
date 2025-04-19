@@ -15,13 +15,16 @@ import {
 } from "./utils/section";
 import Supplier from "./components/Supplier";
 import Footer from "./components/Footer";
+import { isMobile } from "./utils/view";
 
 export function App() {
   const [scrollPercentage, setScrollPercentage] = useState(0);
   const [sections, setSections] = useState<Section[]>([]);
   const [partKeys, setPartKeys] = useState<Record<string, ModelKeyframes>>({});
   const [cameraKeys, setCameraKeys] = useState<CameraKeyframes>({});
-  const [modelFailed, setModelFailed] = useState(false);
+  const [modelFailed, setModelFailed] = useState(
+    window.innerWidth < 600 || isMobile(),
+  );
   const [modelLoaded, setModelLoaded] = useState(false);
   const [showBackup, setShowBackup] = useState(true);
 

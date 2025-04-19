@@ -188,6 +188,7 @@ export default function ComputerPartsViewer({
     const models = [
       { name: "motherboard", path: "/reborex_mb.glb" },
       { name: "ram", path: "/reborex_ram.glb" },
+      { name: "ram2", path: "/reborex_ram2.glb" },
       { name: "psu", path: "/reborex_psu.glb" },
       { name: "gpu", path: "/reborex_gpu.glb" },
       { name: "cpu", path: "/reborex_cpu.glb" },
