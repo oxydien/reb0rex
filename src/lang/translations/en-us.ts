@@ -12,9 +12,9 @@ export const EnUsTranslation: Translation = {
   "section.card.mb":
     "micro-ATX motherboard, B650 chipset. DDR5 memory, PCIe 5.0, 8+2+1 phases. Dual M.2 slots, 2.5GbE LAN, and USB 3.2 Gen 2 ports.",
 
-  "section.kofi.title": "LET'S MAKE IT HAPPEN",
-  "section.kofi.button": "Help me achieve this",
+  "section.kofi.title": "We did it!",
+  "section.kofi.button": "See on ko-fi",
   "section.kofi.amount": "960$",
   "section.kofi.description":
-    "If you want to help me build my computer and make it faster, you can support me on Ko-fi. It would mean a lot to me. <3",
+    "This project has been achieved. Thanks to all involved <3!",
 };

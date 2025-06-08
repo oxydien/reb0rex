@@ -12,9 +12,9 @@ export const CzCsTranslation: Translation = {
   "section.card.mb":
     "základní deska micro-ATX, čipová sada B650. Paměť DDR5, PCIe 5.0, 8+2+1 fáze. Dva sloty M.2, 2,5GbE LAN a porty USB 3.2 Gen 2.",
 
-  "section.kofi.title": "POJĎME TO USKUTEČNIT",
-  "section.kofi.button": "Pomozte mi toho dosáhnout",
+  "section.kofi.title": "Povedlo se!",
+  "section.kofi.button": "Shlédnout na ko-fi",
   "section.kofi.amount": "21 000,-",
   "section.kofi.description":
-    "Pokud mi chcete pomoci sestavit počítač a zrychlit ho, můžete mě podpořit na Ko-fi. Hodně by to pro mě znamenalo. <3",
+    "Tento projekt byl realizován. Děkuji všem co se zapojili <3!"
 };

@@ -13,7 +13,7 @@ export default function KofiPropagation({
 }) {
   const [opacity, setOpacity] = useState(0);
 
-  const PROGRESS = 24.2;
+  const PROGRESS = 100;
 
   useEffect(() => {
     const localPercentage = getLocalSectionPercentage(section_id, scroll);
